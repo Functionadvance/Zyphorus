@@ -474,7 +474,7 @@ function ClosureEvn()
 
         if config.WindowStroke then
             uiStrokeClonRefer = Instance.new("UIStroke");
-            uiStrokeClonRefer.Color = Color3.fromRGB(0, 170, 255);
+            uiStrokeClonRefer.Color = Color3.fromRGB(10, 20, 40);
             uiStrokeClonRefer.Thickness = 2;
             uiStrokeClonRefer.Parent = MainFrame;
         end;
