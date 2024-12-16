@@ -231,7 +231,7 @@ function ClosureEvn()
         GLImage.Name = "GLImage"
         GLImage.Parent = E
         GLImage.AnchorPoint = Vector2.new(0.5, 0.5)
-        GLImage.BackgroundColor3 = Color3.fromRGB(0, 0, 128),
+        GLImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         GLImage.BackgroundTransparency = 1.000
         GLImage.BorderColor3 = Color3.fromRGB(0, 0, 0)
         GLImage.BorderSizePixel = 0
@@ -240,7 +240,7 @@ function ClosureEvn()
         GLImage.SizeConstraint = Enum.SizeConstraint.RelativeYY
         GLImage.ZIndex = E.ZIndex - 1;
         GLImage.Image = "rbxassetid://867619398"
-        GLImage.ImageColor3 = Color or Color3.fromRGB(0, 0, 128)
+        GLImage.ImageColor3 = Color or Color3.fromRGB(0, 195, 255)
         GLImage.ImageTransparency = 1;
 
         local str = 'GL_EFFECT_'..tostring(tick());
@@ -282,7 +282,7 @@ function ClosureEvn()
             Size = UDim2.new(0.100000001, 445, 0.100000001, 315),
             IsRich = false,
             RichText = '<font color="#0000FF">NeuronX</font> <font color="#FFFFFF">On Top</font>',
-            BlockFrameColor = Color3.fromRGB(0, 0, 128),
+            BlockFrameColor = Color3.fromRGB(128, 0, 128),
             BlockTransparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.98, 0.00), NumberSequenceKeypoint.new(1.00, 1.00)},
             BlockTransparency2 = 0.4,
             WindowStroke = true
