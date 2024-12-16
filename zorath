@@ -282,7 +282,7 @@ function ClosureEvn()
             Size = UDim2.new(0.100000001, 445, 0.100000001, 315),
             IsRich = false,
             RichText = '<font color="#0000FF">NeuronX</font> <font color="#FFFFFF">On Top</font>',
-            BlockFrameColor = Color3.fromRGB(128, 0, 128),
+            BlockFrameColor = Color3.fromRGB(0, 0, 128),
             BlockTransparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.98, 0.00), NumberSequenceKeypoint.new(1.00, 1.00)},
             BlockTransparency2 = 0.4,
             WindowStroke = true
