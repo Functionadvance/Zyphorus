@@ -2025,6 +2025,7 @@ function ClosureEvn()
                         Min = 0,
                         Max = 100,
                         Default = 50,
+                        Rounding = 1,
                         Callback = function()
 
                         end,
@@ -2141,56 +2142,57 @@ function ClosureEvn()
                     UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
                     UIStroke_2.Parent = MFrame
 
-                    local Holding = false
+                    function SectionTable:NewSlider(slider)
 
-                    local function update(Input)
-                        local SizeScale = math.clamp((((Input.Position.X) - MFrame.AbsolutePosition.X) / MFrame.AbsoluteSize.X), 0, 1)
-                        local Main = ((slider.Max - slider.Min) * SizeScale) + slider.Min;
-                        local Value = math.round(Main)
-                        local Size = UDim2.fromScale(SizeScale, 1)
-                        ValueText.Text = tostring(Value)..'/'..tostring(slider.Max)
-                        Twen:Create(TFrame,TweenInfo.new(0.1),{Size = Size}):Play()
-                        slider.Callback(Value);
-                    end
+    local Holding = false
 
-                    MFrame.InputBegan:Connect(function(Input)
-                        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                            Holding = true
-                            update(Input)
-                            Twen:Create(TextInt,TweenInfo.new(0.1),{
-                                TextTransparency = 0
-                            }):Play()
-                        end
-                    end)
+    local function update(Input)
+        local SizeScale = math.clamp((((Input.Position.X) - MFrame.AbsolutePosition.X) / MFrame.AbsoluteSize.X), 0, 1)
+        local Main = ((slider.Max - slider.Min) * SizeScale) + slider.Min
+        local Value = math.round(Main / slider.Rounding) * slider.Rounding
+        local Size = UDim2.fromScale(SizeScale, 1)
+        ValueText.Text = tostring(Value) .. '/' .. tostring(slider.Max)
+        Twen:Create(TFrame, TweenInfo.new(0.1), { Size = Size }):Play()
+        slider.Callback(Value)
+    end
 
-                    MFrame.InputEnded:Connect(function(Input)
-                        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                            Holding = false
-                            Twen:Create(TextInt,TweenInfo.new(0.1),{
-                                TextTransparency = 0.3
-                            }):Play()
-                        end
-                    end)
+    MFrame.InputBegan:Connect(function(Input)
+        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+            Holding = true
+            update(Input)
+            Twen:Create(TextInt, TweenInfo.new(0.1), {
+                TextTransparency = 0
+            }):Play()
+        end
+    end)
 
-                    Input.InputChanged:Connect(function(Input)
-                        if Holding then
-                            if (Input.UserInputType==Enum.UserInputType.MouseMovement or Input.UserInputType==Enum.UserInputType.Touch)  then
-                                update(Input)
-                            end
-                        end
-                    end)
+    MFrame.InputEnded:Connect(function(Input)
+        if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+            Holding = false
+            Twen:Create(TextInt, TweenInfo.new(0.1), {
+                TextTransparency = 0.3
+            }):Play()
+        end
+    end)
 
-                    return {
-                        Visible = function(newindx)
-                            FunctionSlider.Visible = newindx
-                        end,
-                        Value = function(lrm)
-                            TFrame.Size = UDim2.new((lrm / slider.Max), 0, 1, 0)
+    Input.InputChanged:Connect(function(Input)
+        if Holding then
+            if (Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch) then
+                update(Input)
+            end
+        end
+    end)
 
-                            slider.Callback(lrm);
-                        end,
-                    };
-                end;
+    return {
+        Visible = function(newindx)
+            FunctionSlider.Visible = newindx
+        end,
+        Value = function(lrm)
+            TFrame.Size = UDim2.new((lrm / slider.Max), 0, 1, 0)
+            slider.Callback(lrm)
+        end,
+    };
+end;
 
                 function SectionTable:NewDropdown(drop)
                     drop = Config(drop,{
