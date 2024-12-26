@@ -52,11 +52,11 @@ local Assets = ScreenGui.Assets
 local Modules = {
 	Dropdown = loadstring(game:HttpGet("https://raw.githubusercontent.com/L3nyFromV3rm/Leny-UI/refs/heads/main/Modules/Dropdown.lua", true))(),
 	Toggle = loadstring(game:HttpGet("https://raw.githubusercontent.com/L3nyFromV3rm/Leny-UI/refs/heads/main/Modules/Toggle.lua", true))(),
-	Popup = loadstring(game:HttpGet("https://raw.githubusercontent.com/L3nyFromV3rm/Leny-UI/refs/heads/main/Modules/Popup.lua", true))(),
+	Popup = loadstring(game:HttpGet("https://raw.githubusercontent.com/Functionadvance/Zyphorus/refs/heads/main/Popup.lua", true))(),
 	Slider = loadstring(game:HttpGet("https://raw.githubusercontent.com/L3nyFromV3rm/Leny-UI/refs/heads/main/Modules/Slider.lua", true))(),
 	Keybind = loadstring(game:HttpGet("https://raw.githubusercontent.com/L3nyFromV3rm/Leny-UI/refs/heads/main/Modules/Keybind.lua", true))(),
 	TextBox = loadstring(game:HttpGet("https://raw.githubusercontent.com/L3nyFromV3rm/Leny-UI/refs/heads/main/Modules/TextBox.lua", true))(),
-	Navigation = loadstring(game:HttpGet("https://raw.githubusercontent.com/L3nyFromV3rm/Leny-UI/refs/heads/main/Modules/Navigation.lua", true))(),
+	Navigation = loadstring(game:HttpGet("https://raw.githubusercontent.com/Functionadvance/Zyphorus/refs/heads/main/Navigation.lua", true))(),
 	ColorPicker = loadstring(game:HttpGet("https://raw.githubusercontent.com/L3nyFromV3rm/Leny-UI/refs/heads/main/Modules/ColorPicker.lua", true))(),
 }
 
