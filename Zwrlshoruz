@@ -2644,5 +2644,5 @@ function Library:create_ui()
         self:change_visiblity(self._ui_open)
     end)
 
-    return self
+    return Library
 end
