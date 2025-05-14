@@ -3889,30 +3889,18 @@ function Airflow:Elements(element : Frame,OnChange : BindableEvent , windowConfi
 	function elements:GetInfo()
 		return ElementIDs;
 	end;
+
+	return elements;
+end;
 local DropdownObject = {}
-function DropdownObject:SetValue(value)
-	if config.Multi then
-		if typeof(value) == "table" then
-			config.Default = value
-		else
-			config.Default = { value }
-		end
-	else
-		config.Default = value
-	end
 
-	VText.Text = parse(config.Default)
-
-	if typeof(config.Callback) == "function" then
-		config.Callback(config.Default)
-	end
+function DropdownObject:SetDropdownValue(value)
+	config.Default = value
+	VText.Text = parse(value)
 end
 
 return DropdownObject
 
-
-	return elements;
-end;
 function Airflow:Init(config)
 	config = config or {};
 	config.Name = config.Name or "airflow";
