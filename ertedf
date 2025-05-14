@@ -3889,10 +3889,7 @@ function Airflow:Elements(element : Frame,OnChange : BindableEvent , windowConfi
 	function elements:GetInfo()
 		return ElementIDs;
 	end;
-
-	return elements;
-end;
-function elements:SetDropdownValue(dropdownElement, newValue)
+    function elements:SetDropdownValue(dropdownElement, newValue)
     if dropdownElement and dropdownElement:IsA("Frame") then
         local VText = dropdownElement:FindFirstChild("TextLabel")
         local config = dropdownElement.Config
@@ -3923,6 +3920,9 @@ function elements:SetDropdownValue(dropdownElement, newValue)
         }
     end
 end
+
+	return elements;
+end;
 function Airflow:Init(config)
 	config = config or {};
 	config.Name = config.Name or "airflow";
