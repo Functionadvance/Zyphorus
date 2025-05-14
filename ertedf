@@ -3889,37 +3889,27 @@ function Airflow:Elements(element : Frame,OnChange : BindableEvent , windowConfi
 	function elements:GetInfo()
 		return ElementIDs;
 	end;
-    function elements:SetDropdownValue(dropdownElement, newValue)
-    if dropdownElement and dropdownElement:IsA("Frame") then
-        local VText = dropdownElement:FindFirstChild("TextLabel")
-        local config = dropdownElement.Config
-        local parse = function(value)
-            if not value then return 'NONE' end
-            local Out
-            if typeof(value) == 'table' then
-                local x = {}
-                for i, v in next, value do
-                    table.insert(x, tostring(v))
-                end
-                Out = table.concat(x, ' , ')
-            else
-                Out = tostring(value)
-            end
-            return Out
-        end
+local DropdownObject = {}
+function DropdownObject:SetValue(value)
+	if config.Multi then
+		if typeof(value) == "table" then
+			config.Default = value
+		else
+			config.Default = { value }
+		end
+	else
+		config.Default = value
+	end
 
-        config.Default = newValue
-        VText.Text = parse(newValue)
+	VText.Text = parse(config.Default)
 
-        if config.Callback then
-            config.Callback(newValue)
-        end
-
-        ElementConfigs["Dropdown_"..config.Name.."_"..tostring(dropdownElement)] = {
-            Value = newValue,
-        }
-    end
+	if typeof(config.Callback) == "function" then
+		config.Callback(config.Default)
+	end
 end
+
+return DropdownObject
+
 
 	return elements;
 end;
