@@ -3514,6 +3514,7 @@ function Airflow:Elements(element : Frame,OnChange : BindableEvent , windowConfi
 		LineV.BorderSizePixel = 0
 		LineV.Size = UDim2.new(1, 0, 0, 1)
 		LineV.ZIndex = 101
+
 		ScrollingFrame.Parent = DropdownInner
 		ScrollingFrame.Active = true
 		ScrollingFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -3556,6 +3557,7 @@ function Airflow:Elements(element : Frame,OnChange : BindableEvent , windowConfi
 		UIListLayout:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function() 
 			ScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y + 2)
 		end);
+
 		local IsDefault = function(val)
 			if typeof(config.Default) == 'table' then
 				if table.find(config.Default,val) or config.Default[val] then
@@ -3690,24 +3692,6 @@ function Airflow:Elements(element : Frame,OnChange : BindableEvent , windowConfi
 				Size = UDim2.new(1, -45,0, 20)
 			})
 		end;
-        local DropdownData = {
-		Update = function(newConfig)
-			if newConfig.Values then
-				config.Values = newConfig.Values
-			end
-			if newConfig.Default then
-				config.Default = newConfig.Default
-			end
-			if newConfig.Multi ~= nil then
-				config.Multi = newConfig.Multi
-			end
-			if newConfig.Callback then
-				config.Callback = newConfig.Callback
-			end
-			refresh()
-			VText.Text = parse(config.Default)
-		end
-	}
 
 		ElementConfigs["Dropdown_"..config.Name.."_"..tostring(ID)] = {
 			Value = config.Default,
@@ -3908,7 +3892,37 @@ function Airflow:Elements(element : Frame,OnChange : BindableEvent , windowConfi
 
 	return elements;
 end;
+function elements:SetDropdownValue(dropdownElement, newValue)
+    if dropdownElement and dropdownElement:IsA("Frame") then
+        local VText = dropdownElement:FindFirstChild("TextLabel")
+        local config = dropdownElement.Config
+        local parse = function(value)
+            if not value then return 'NONE' end
+            local Out
+            if typeof(value) == 'table' then
+                local x = {}
+                for i, v in next, value do
+                    table.insert(x, tostring(v))
+                end
+                Out = table.concat(x, ' , ')
+            else
+                Out = tostring(value)
+            end
+            return Out
+        end
 
+        config.Default = newValue
+        VText.Text = parse(newValue)
+
+        if config.Callback then
+            config.Callback(newValue)
+        end
+
+        ElementConfigs["Dropdown_"..config.Name.."_"..tostring(dropdownElement)] = {
+            Value = newValue,
+        }
+    end
+end
 function Airflow:Init(config)
 	config = config or {};
 	config.Name = config.Name or "airflow";
